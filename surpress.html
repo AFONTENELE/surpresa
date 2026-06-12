@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuzinho hj?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Fundo degradê vermelho e preto simulando movimento de ondas */
+            background: linear-gradient(45deg, #050000, #1a0003, #4a0007, #1a0003, #050000);
+            background-size: 400% 400%;
+            animation: waveGradient 12s ease infinite;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Animação do fundo em ondas */
+        @keyframes waveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px 60px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 77, 109, 0.1);
+            z-index: 10;
+        }
+
+        /* Título romântico e pulsante */
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff4d6d;
+            margin: 0 0 40px 0;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5), 0 0 20px rgba(255, 77, 109, 0.3);
+            animation: pulseText 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseText {
+            0% { transform: scale(1); text-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
+            100% { transform: scale(1.03); text-shadow: 0 0 25px rgba(255, 77, 109, 0.8), 0 0 10px #ff0000; }
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            min-height: 60px;
+            align-items: center;
+        }
+
+        /* Estilização dos Botões com volume 3D */
+        .btn {
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Botão SIM - Tons de Rosa/Vermelho Romântico */
+        #sim {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: #fff;
+            /* Sombras que dão ideia de volume (3D) */
+            box-shadow: 0 6px 0 #b7094c, 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #sim:hover {
+            background: linear-gradient(135deg, #ff758f, #ff8fa3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #b7094c, 0 12px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Efeito de clique físico (afundar) */
+        #sim:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #b7094c, 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Botão NÃO - Tom sóbrio que vai fugir */
+        #nao {
+            background: linear-gradient(135deg, #4a4e69, #9a8c98);
+            color: #fff;
+            box-shadow: 0 6px 0 #22223b, 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Corações flutuantes */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            pointer-events: none;
+            font-size: 20px;
+            filter: drop-shadow(0 0 5px rgba(255,77,109,0.5));
+            animation: floatUp 5s linear forwards;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">Cuzinho hoje? 🌹</h1>
+        <div class="btn-group">
+            <button id="sim" class="btn">Sim, com certeza!</button>
+            <button id="nao" class="btn">Não</button>
+        </div>
+    </div>
+
+    <script>
+        const simBtn = document.getElementById('sim');
+        const naoBtn = document.getElementById('nao');
+
+        // Redirecionamento do botão SIM
+        simBtn.addEventListener('click', () => {
+            window.location.href = 'https://www.youtube.com/watch?v=izGwDsrQ1eQ';
+        });
+
+        // Função para mover o botão NÃO de forma inteligente na tela toda
+        function desviar() {
+            // Garante que o botão use posição absoluta para voar pela tela livremente
+            naoBtn.style.position = 'absolute';
+            
+            // Define limites para o botão não sumir completamente da barra de rolagem
+            const maxX = window.innerWidth - naoBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - naoBtn.offsetHeight - 20;
+
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            naoBtn.style.left = randomX + 'px';
+            naoBtn.style.top = randomY + 'px';
+        }
+
+        // Faz o botão fugir tanto ao passar o mouse (computador) quanto ao tocar (celular)
+        naoBtn.addEventListener('mouseover', desviar);
+        naoBtn.addEventListener('click', desviar);
+
+        // Sistema para gerar corações aleatórios no fundo
+        function criarCoracao() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Alterna o estilo do emoji de coração para dar variedade
+            const modelos = ['❤️', '💖', '💘', '💕', '🌹'];
+            heart.innerHTML = modelos[Math.floor(Math.random() * modelos.length)];
+            
+            // Posição horizontal aleatória
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Tamanho aleatório
+            const tamanho = Math.random() * 20 + 10; // entre 10px e 30px
+            heart.style.fontSize = tamanho + 'px';
+            
+            // Velocidade da animação aleatória para parecer natural
+            const duracao = Math.random() * 3 + 4; // entre 4s e 7s
+            heart.style.animationDuration = duracao + 's';
+            
+            document.body.appendChild(heart);
+
+            // Remove o coração após a animação acabar para não travar a página
+            setTimeout(() => {
+                heart.remove();
+            }, duracao * 1000);
+        }
+
+        // Cria um novo coração a cada 350 milissegundos
+        setInterval(criarCoracao, 350);
+    </script>
+</body>
+</html>
